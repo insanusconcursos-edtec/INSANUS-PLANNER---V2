@@ -1527,7 +1527,7 @@ export const UserDashboard: React.FC<Props> = ({ user, onUpdateUser, onReturnToA
       const percentage = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
 
       const toggleEditalDisc = (id: string) => {
-          setEditalExpanded(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+          setEditalExpanded((prev: string[]) => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
       };
 
       return (
