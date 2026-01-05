@@ -1096,11 +1096,11 @@ export const UserDashboard: React.FC<Props> = ({ user, onUpdateUser, onReturnToA
   };
   
   const handleSimuladoFinished = async (result: SimuladoAttempt) => { await saveSimuladoAttemptToDB(result); setAttempts(prev => [...prev, result]); setAllAttempts(prev => [...prev, result]); };
-  const toggleAccordion = (uniqueId: string) => setExpandedItems(prev => prev.includes(uniqueId) ? prev.filter(id => id !== uniqueId) : [...prev, uniqueId]);
+  const toggleAccordion = (uniqueId: string) => setExpandedItems((prev: string[]) => prev.includes(uniqueId) ? prev.filter(id => id !== uniqueId) : [...prev, uniqueId]);
   
   // Helper for Edital SubGoals Accordion
   const toggleEditalSubGoals = (goalId: string) => {
-      setEditalSubGoalsExpanded(prev => prev.includes(goalId) ? prev.filter(id => id !== goalId) : [...prev, goalId]);
+      setEditalSubGoalsExpanded((prev: string[]) => prev.includes(goalId) ? prev.filter(id => id !== goalId) : [...prev, goalId]);
   };
 
   const renderDailyView = () => {
