@@ -1096,11 +1096,13 @@ export const UserDashboard: React.FC<Props> = ({ user, onUpdateUser, onReturnToA
   };
   
   const handleSimuladoFinished = async (result: SimuladoAttempt) => { await saveSimuladoAttemptToDB(result); setAttempts(prev => [...prev, result]); setAllAttempts(prev => [...prev, result]); };
-  const toggleAccordion = (uniqueId: string) => setExpandedItems((prev: string[]) => prev.includes(uniqueId) ? prev.filter(id => id !== uniqueId) : [...prev, uniqueId]);
+  
+  // Explicitly type 'prev' as 'any' or cast to string[] to avoid TS unknown errors
+  const toggleAccordion = (uniqueId: string) => setExpandedItems((prev: any) => prev.includes(uniqueId) ? prev.filter((id: string) => id !== uniqueId) : [...prev, uniqueId]);
   
   // Helper for Edital SubGoals Accordion
   const toggleEditalSubGoals = (goalId: string) => {
-      setEditalSubGoalsExpanded((prev: string[]) => prev.includes(goalId) ? prev.filter(id => id !== goalId) : [...prev, goalId]);
+      setEditalSubGoalsExpanded((prev: any) => prev.includes(goalId) ? prev.filter((id: string) => id !== goalId) : [...prev, goalId]);
   };
 
   const renderDailyView = () => {
@@ -1527,7 +1529,7 @@ export const UserDashboard: React.FC<Props> = ({ user, onUpdateUser, onReturnToA
       const percentage = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
 
       const toggleEditalDisc = (id: string) => {
-          setEditalExpanded((prev: string[]) => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+          setEditalExpanded((prev: any) => prev.includes(id) ? prev.filter((x: string) => x !== id) : [...prev, id]);
       };
 
       return (

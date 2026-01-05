@@ -2,11 +2,17 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { Flashcard } from "../types";
 import { uuid } from "../constants";
 
-// Initialize Gemini Client
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export const generateFlashcardsFromPDF = async (base64Pdf: string): Promise<Flashcard[]> => {
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) {
+      console.error("API Key do Google Gemini não configurada.");
+      throw new Error("Chave de API não encontrada. Contate o administrador.");
+  }
+
   try {
+    // Initialize Gemini Client Lazily
+    const ai = new GoogleGenAI({ apiKey: apiKey });
+
     // Clean base64 string if it contains metadata header
     const cleanBase64 = base64Pdf.replace(/^data:application\/pdf;base64,/, "");
 

@@ -15,8 +15,9 @@ export default defineConfig(({ mode }) => {
       sourcemap: false
     },
     define: {
-      // Isso substitui 'process.env.API_KEY' pelo valor real durante o build
-      'process.env.API_KEY': JSON.stringify(env.API_KEY || process.env.API_KEY),
+      // Isso substitui 'process.env.API_KEY' pelo valor real durante o build.
+      // O '|| ""' garante que não seja inserido 'undefined' no código final.
+      'process.env.API_KEY': JSON.stringify(env.API_KEY || process.env.API_KEY || ""),
       // Isso previne o erro "process is not defined" no navegador
       'process.env': {}
     }
